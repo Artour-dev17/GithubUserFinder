@@ -1,7 +1,15 @@
 import {useState} from "react";
 
-function SearchForm() {
+
+type OnSearchProp = {
+    onSearch: (searchTerm: string) => void;
+}
+function SearchForm({ onSearch, }: OnSearchProp) {
     const [searchTerm, setSearchTerm] = useState("");
+
+    const handleUserSearch = ()=>{
+       onSearch(searchTerm);
+    };
     return (
         <div>
             <input
@@ -13,7 +21,7 @@ function SearchForm() {
             }
             />
 
-            <button>
+            <button onClick={handleUserSearch}>
                 Search
             </button>
         </div>
