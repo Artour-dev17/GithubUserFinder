@@ -28,12 +28,15 @@ function App() {
         } else {
             setUser(null);
             setError("Error, user not found");
-
+        }
+        if (data.message?.includes("API rate limit exceeded")){
+            setError("API rate limit exceeded. Try again later");
         }
         setLoading(false);
     }
 
     useEffect(()=> {
+
        handleSearch("gaearon");
     },[]);
 
