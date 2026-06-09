@@ -11,7 +11,7 @@ function SearchForm({ onSearch, }: OnSearchProp) {
        onSearch(searchTerm);
     };
     return (
-        <div>
+        <div className="search-form">
             <input
                 type="text"
                 placeholder="Github username..."
@@ -19,6 +19,11 @@ function SearchForm({ onSearch, }: OnSearchProp) {
                 onChange={(event)=>
                 setSearchTerm(event.target.value)
             }
+                onKeyDown={(event)=>{
+                    if (event.key === "Enter") {
+                        handleUserSearch();
+                    }
+                }}
             />
 
             <button onClick={handleUserSearch}>

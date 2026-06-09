@@ -2,8 +2,9 @@ import './App.css'
 import SearchForm from "./Components/SearchForm.tsx";
 import UserCard from "./Components/UserCard.tsx";
 import { getUser } from "./Services/githubApi.ts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type {User} from "./Types/user.ts";
+
 
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+
 
     const handleSearch = async (
         username: string
@@ -24,14 +27,18 @@ function App() {
             setUser(data)
         } else {
             setUser(null);
-            setError("Ошибка, пользователь не найден");
+            setError("Error, user not found");
 
         }
         setLoading(false);
     }
 
+    useEffect(()=> {
+       handleSearch("gaearon");
+    },[]);
+
   return (
-      <div>
+      <div className="app">
         <h1>Github User Finder</h1>
 
         <SearchForm onSearch={handleSearch}/>
